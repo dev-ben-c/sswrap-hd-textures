@@ -3,10 +3,14 @@
 A fan-made HD texture pack for **Starsiege**, for use with
 [sswrap](https://github.com/dev-ben-c/sswrap), the OpenGL wrapper that loads it.
 
-About 4,700 of the game's textures (terrain, skies, Herc skins, buildings, weapon effects),
-upscaled 4x with [Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN) (`realesrgan-x4plus`).
+About 4,900 of the game's textures (terrain, skies, Herc skins, buildings, weapon effects, the
+splash screen and menu backgrounds), upscaled 4x with
+[Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN) (`realesrgan-x4plus`).
 Tiling surfaces such as terrain were padded with their own wrapped edges before upscaling so
-they stay seamless; skies, skins and logos were padded by extending their edges instead.
+they stay seamless; skins and logos were padded by extending their edges instead. Textures that
+belong together were upscaled as one image and cut apart again, so they still join seamlessly:
+each sky's ring of panels, and the splash screen and menu backgrounds, which the game cuts into
+tiles (sswrap's `tools/hd-textures/stitch.py`).
 
 ## Download and install
 
@@ -28,13 +32,15 @@ loads is normal.
 - Covers everything seen in the **multiplayer maps** and most vehicles. Campaign-only content is
   not included yet. To fill gaps for your own copy, use sswrap's `TextureDump` and
   `tools/hd-textures/build.sh`; it only adds textures that are missing.
-- HUD and menu art is not covered: the game assembles it at runtime in a way that never produces
-  the same texture twice.
+- HUD and menu buttons and text are not covered: the game assembles them at runtime in a way
+  that never produces the same texture twice. (sswrap smooths those itself.)
+- Needs sswrap 0.3.0 or newer: it puts a texture back to its original size when the game
+  repaints it at runtime (the main menu's video and animations).
 
 ## Known issues
 
-- Skies are built from several panels that were upscaled separately, so a few panel edges don't
-  meet perfectly.
+- A few skies were only partly seen when the pack was made; a join to a panel that wasn't seen
+  can still show a faint seam.
 - Noisy surfaces (cracked mud, gravel) come out cleaner and slightly more "painted" than the
   originals; that is the upscaling model's style.
 
