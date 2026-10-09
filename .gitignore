@@ -1,0 +1,4 @@
+# the pack itself is published as a release download, not committed
+*.zip
+sswrap_textures/
+dist/
